@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Money Mate Page</title>
+    <style>
+      body {
+        background-color: lightblue;
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        color: #000000;
+      }
+
+      h1 {
+        color: blue;
+        margin-bottom: 15px;
+      }
+
+      .container {
+        background-color: white;
+        padding: 20px 25px;
+        margin-bottom: 20px;
+      }
+
+      h2,
+      h3 {
+        margin-top: 0;
+        color: #000000;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      select {
+        padding: 4px 6px;
+        font-size: 14px;
+        border: 1px solid #767676;
+        border-radius: 2px;
+      }
+
+      .btn-group {
+        margin-top: 15px;
+      }
+
+      button {
+        background-color: gray;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 6px;
+      }
+
+      button:hover {
+        background-color: darkgreen;
+      }
+
+      hr {
+        border: 0;
+        border-top: 1px solid #cccccc;
+        margin: 20px 0;
+      }
+
+      .analysis-section {
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .analysis-section h3 {
+        margin-bottom: 6px;
+        font-size: 18px;
+      }
+
+      .analysis-section p {
+        margin: 3px 0;
+        font-size: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MoneyMate MonthlyAnalysis</h1>
+
+    <div class="container">
+      <h2>Financial Analysis Form</h2>
+
+      <div class="form-group">
+        <label for="totalIncome">Total Income (Rs.):</label>
+        <input
+          type="number"
+          id="totalIncome"
+          placeholder="Example: 25000.0"
+          value="25000"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="totalExpense">Total Expense (Rs.):</label>
+        <input
+          type="number"
+          id="totalExpense"
+          placeholder="Example: 12000.0"
+          value="12000"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="totalBudget">Total Budget (Rs.):</label>
+        <input
+          type="number"
+          id="totalBudget"
+          placeholder="Example: 15000.0"
+          value="15000"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="categorySelect">Category:</label>
+        <select id="categorySelect">
+          <option value="Education">Education</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Transport">Transport</option>
+          <option value="Food">Food</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="categoryAmount">Category Expense (Rs.):</label>
+        <input
+          type="number"
+          id="categoryAmount"
+          placeholder="Enter category amount"
+          value="4000"
+        />
+      </div>
+
+      <div class="btn-group">
+        <button type="button" id="analyzeBtn">Analyze</button>
+        <button type="button" id="updateCategoryBtn">Update Category</button>
+        <button type="button" id="clearBtn">Clear</button>
+        <button type="button" id="resetBtn">Reset Default</button>
+      </div>
+
+      <hr />
+
+      <h2>Analysis Output</h2>
+
+      <div class="analysis-section">
+        <h3>Summary</h3>
+        <p id="outIncome">Total Income : Rs. 25000.0</p>
+        <p id="outExpense">Total Expense : Rs. 12000.0</p>
+        <p id="outBudget">Total Budget : Rs. 15000.0</p>
+        <p id="outSavings">Total Savings : Rs. 13000.0</p>
+      </div>
+
+      <div class="analysis-section">
+        <h3>--- Budget Analysis ---</h3>
+        <p id="outBudgetStatus">You are within your budget.</p>
+        <p id="outRemainingBudget">Remaining Budget: Rs. 3000.0</p>
+      </div>
+
+      <div class="analysis-section">
+        <h3>--- Overspending Analysis ---</h3>
+        <p id="outOverspending">No major overspending detected.</p>
+      </div>
+
+      <div class="analysis-section">
+        <h3>--- Category-wise Expenses ---</h3>
+        <div id="outCategories">
+          <p>Education : Rs. 4000.0</p>
+          <p>Shopping : Rs. 2000.0</p>
+          <p>Transport : Rs. 1500.0</p>
+          <p>Food : Rs. 3000.0</p>
+        </div>
+      </div>
+
+      <div class="analysis-section">
+        <h3>--- Monthly Insights ---</h3>
+        <p id="outInsightMsg">Good! You saved Rs. 13000.0</p>
+        <p id="outSavingsPct">Savings Percentage: 52.00%</p>
+      </div>
+    </div>
+
+    <script>
+      const defaultCategories = {
+        Education: 4000.0,
+        Shopping: 2000.0,
+        Transport: 1500.0,
+        Food: 3000.0,
+      };
+
+      let categories = Object.assign({}, defaultCategories);
+
+      function formatRs(num) {
+        return "Rs. " + Number(num).toFixed(1);
+      }
+
+      function updateAnalysis() {
+        const income =
+          parseFloat(document.getElementById("totalIncome").value) || 0;
+        const expense =
+          parseFloat(document.getElementById("totalExpense").value) || 0;
+        const budget =
+          parseFloat(document.getElementById("totalBudget").value) || 0;
+
+        const savings = income - expense;
+        const remainingBudget = budget - expense;
+        const savingsPct = income > 0 ? (savings / income) * 100 : 0;
+
+        document.getElementById("outIncome").textContent =
+          "Total Income : " + formatRs(income);
+        document.getElementById("outExpense").textContent =
+          "Total Expense : " + formatRs(expense);
+        document.getElementById("outBudget").textContent =
+          "Total Budget : " + formatRs(budget);
+        document.getElementById("outSavings").textContent =
+          "Total Savings : " + formatRs(savings);
+
+        if (remainingBudget >= 0) {
+          document.getElementById("outBudgetStatus").textContent =
+            "You are within your budget.";
+          document.getElementById("outRemainingBudget").textContent =
+            "Remaining Budget: " + formatRs(remainingBudget);
+          document.getElementById("outOverspending").textContent =
+            "No major overspending detected.";
+        } else {
+          document.getElementById("outBudgetStatus").textContent =
+            "You have exceeded your budget.";
+          document.getElementById("outRemainingBudget").textContent =
+            "Over Budget: " + formatRs(Math.abs(remainingBudget));
+          document.getElementById("outOverspending").textContent =
+            "Overspending detected!";
+        }
+
+        const catContainer = document.getElementById("outCategories");
+        catContainer.innerHTML = "";
+        Object.keys(categories).forEach(function (key) {
+          const p = document.createElement("p");
+          p.textContent = key + " : " + formatRs(categories[key]);
+          catContainer.appendChild(p);
+        });
+
+        if (savings >= 0) {
+          document.getElementById("outInsightMsg").textContent =
+            "Good! You saved " + formatRs(savings);
+        } else {
+          document.getElementById("outInsightMsg").textContent =
+            "Alert! Deficit of " + formatRs(Math.abs(savings));
+        }
+        document.getElementById("outSavingsPct").textContent =
+          "Savings Percentage: " + savingsPct.toFixed(2) + "%";
+      }
+
+      document
+        .getElementById("categorySelect")
+        .addEventListener("change", function (e) {
+          const selected = e.target.value;
+          document.getElementById("categoryAmount").value =
+            categories[selected] || 0;
+        });
+
+      document
+        .getElementById("analyzeBtn")
+        .addEventListener("click", function () {
+          updateAnalysis();
+        });
+
+      document
+        .getElementById("updateCategoryBtn")
+        .addEventListener("click", function () {
+          const selected = document.getElementById("categorySelect").value;
+          const amt =
+            parseFloat(document.getElementById("categoryAmount").value) || 0;
+          categories[selected] = amt;
+          updateAnalysis();
+        });
+
+      document
+        .getElementById("clearBtn")
+        .addEventListener("click", function () {
+          document.getElementById("totalIncome").value = "";
+          document.getElementById("totalExpense").value = "";
+          document.getElementById("totalBudget").value = "";
+          document.getElementById("categoryAmount").value = "";
+          updateAnalysis();
+        });
+
+      document
+        .getElementById("resetBtn")
+        .addEventListener("click", function () {
+          document.getElementById("totalIncome").value = 25000;
+          document.getElementById("totalExpense").value = 12000;
+          document.getElementById("totalBudget").value = 15000;
+          categories = Object.assign({}, defaultCategories);
+          const selected = document.getElementById("categorySelect").value;
+          document.getElementById("categoryAmount").value =
+            categories[selected];
+          updateAnalysis();
+        });
+
+      updateAnalysis();
+    </script>
+  </body>
+</html>
