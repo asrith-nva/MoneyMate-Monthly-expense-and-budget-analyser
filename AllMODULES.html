@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MoneyMate - Monthly Expense &amp; Budget Analyzer</title>
+  <style>
+    body {
+      background-color: blue;
+      font-family: Arial, sans-serif;
+      margin: 25px;
+      color: #000000;
+    }
+
+    h1 {
+      color: purple;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 15px;
+      color: #222222;
+    }
+
+    .container {
+      background-color: white;
+      padding: 20px 25px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: #000000;
+      font-size: 20px;
+    }
+
+    h3 {
+      margin-top: 14px;
+      margin-bottom: 8px;
+      color: #000000;
+      font-size: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: circle-block;
+      margin-bottom: 5px;
+      font-size: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="date"],
+    select {
+      padding: 5px 7px;
+      font-size: 14px;
+      border: 1px solid #767676;
+      border-radius: 2px;
+      width: 240px;
+      max-width: 100%;
+    }
+
+    .btn-group {
+      margin-top: 14px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 9px 15px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    button:hover {
+      background-color: orangered;
+    }
+
+    .output-box {
+      background-color: #f9f9f9;
+      border: 1px solid #cccccc;
+      padding: 12px 15px;
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .console-box {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      font-family: Consolas, monospace;
+      padding: 15px;
+      margin-top: 12px;
+      white-space: pre-wrap;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #cccccc;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #efefef;
+    }
+
+    .status-msg {
+      margin-top: 8px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .error-msg {
+      margin-top: 8px;
+      font-weight: bold;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MoneyMate – Monthly Expense &amp; Budget Analyzer</h1>
+  <p class="subtitle">Project 23: Complete Interface with All 10 Modules &amp; Expense Categories</p>
+
+  <!-- 10. MAIN MODULE (Menu & Module Selector) -->
+  <div class="container" id="module10">
+    <h2>10. Main Module (Application Menu)</h2>
+    <div class="form-group">
+      <label for="menuSelect">Select Module View (displayMenu / processChoice):</label>
+      <select id="menuSelect">
+        <option value="ALL">Show All Modules (1 - 10)</option>
+        <option value="module1">1. User Module</option>
+        <option value="module2">2. Monthly Income Module</option>
+        <option value="module3">3. Expense Management Module</option>
+        <option value="module4">4. Budget Management Module</option>
+        <option value="module5">5. Monthly Analysis Module</option>
+        <option value="module6">6. ValidateService Module</option>
+        <option value="module7">7. SearchService Module</option>
+        <option value="module8">8. ReportGenerationService Module</option>
+        <option value="module9">9. AnalysisService Module</option>
+      </select>
+    </div>
+    <div class="btn-group">
+      <button type="button" id="mainProcessBtn">Execute Menu Choice</button>
+      <button type="button" id="mainShowAllBtn">Display All Modules</button>
+      <button type="button" id="mainResetBtn">Reset Sample Data</button>
+    </div>
+    <div id="mainStatus" class="status-msg">Application started. All modules loaded.</div>
+  </div>
+
+  <!-- 1. USER MODULE -->
+  <div class="container module-card" id="module1">
+    <h2>1. User Module (Class: User)</h2>
+
+    <div class="form-group">
+      <label for="userId">User ID (userId):</label>
+      <input type="number" id="userId" placeholder="Example: 101" value="101">
+    </div>
+
+    <div class="form-group">
+      <label for="userName">User Name (userName):</label>
+      <input type="text" id="userName" placeholder="Enter user name" value="Rahul Sharma">
+    </div>
+
+    <div class="form-group">
+      <label for="mobileNumber">Mobile Number (mobileNumber):</label>
+      <input type="text" id="mobileNumber" placeholder="Example: 9876543210" value="9876543210">
+    </div>
+
+    <div class="form-group">
+      <label for="userEmail">Email Address (email):</label>
+      <input type="email" id="userEmail" placeholder="Example: user@email.com" value="rahul@moneymate.com">
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="registerUserBtn">Register User</button>
+      <button type="button" id="updateUserBtn">Update User</button>
+      <button type="button" id="displayUserBtn">Display User</button>
+      <button type="button" id="clearUserBtn">Clear</button>
+    </div>
+
+    <div id="userOutput" class="output-box"></div>
+  </div>
+
+  <!-- 2. MONTHLY INCOME MODULE -->
+  <div class="container module-card" id="module2">
+    <h2>2. Monthly Income Module (Class: MonthlyIncome)</h2>
+
+    <div class="form-group">
+      <label for="incomeId">Income ID (incomeId):</label>
+      <input type="number" id="incomeId" placeholder="Example: 1" value="1">
+    </div>
+
+    <div class="form-group">
+      <label for="incomeUserId">User ID (userId):</label>
+      <input type="number" id="incomeUserId" placeholder="Example: 101" value="101">
+    </div>
+
+    <div class="form-group">
+      <label for="incomeMonth">Month (month):</label>
+      <select id="incomeMonth">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November" selected>November</option>
+        <option value="December">December</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="incomeAmount">Income Amount (incomeAmount):</label>
+      <input type="number" id="incomeAmount" placeholder="Example: 25000.0" value="25000">
+    </div>
+
+    <div class="form-group">
+      <label for="incomeSource">Income Source (incomeSource):</label>
+      <select id="incomeSource">
+        <option value="Salary" selected>Salary</option>
+        <option value="Business">Business</option>
+        <option value="Freelance">Freelance</option>
+        <option value="Investments">Investments</option>
+        <option value="Rental">Rental</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="addIncomeBtn">Add Income</button>
+      <button type="button" id="updateIncomeBtn">Update Income</button>
+      <button type="button" id="displayIncomeBtn">Display Income</button>
+      <button type="button" id="calcTotalIncomeBtn">Calculate Total Income</button>
+      <button type="button" id="clearIncomeBtn">Clear</button>
+    </div>
+
+    <div id="incomeOutput" class="output-box"></div>
+  </div>
+
+  <!-- 3. EXPENSE MANAGEMENT MODULE -->
+  <div class="container module-card" id="module3">
+    <h2>3. Expense Management Module (Class: Expense)</h2>
+
+    <div class="form-group">
+      <label for="expenseId">Expense ID (expenseId):</label>
+      <input type="number" id="expenseId" placeholder="Example: 205" value="205">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseUserId">User ID (userId):</label>
+      <input type="number" id="expenseUserId" placeholder="Example: 101" value="101">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseCategory">Category (category):</label>
+      <select id="expenseCategory">
+        <option value="Education">Education</option>
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Transport">Transport</option>
+        <option value="Travel">Travel</option>
+        <option value="Bills">Bills</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="expenseDate">Expense Date (expenseDate):</label>
+      <input type="date" id="expenseDate" value="2026-11-02">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseAmount">Amount (amount):</label>
+      <input type="number" id="expenseAmount" placeholder="Example: 1500.0" value="1500">
+    </div>
+
+    <div class="form-group">
+      <label for="expenseDescription">Description (description):</label>
+      <input type="text" id="expenseDescription" placeholder="Enter expense details" value="Monthly utility bills">
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="addExpenseBtn">Add Expense</button>
+      <button type="button" id="updateExpenseBtn">Update Expense</button>
+      <button type="button" id="deleteExpenseBtn">Delete Expense (by ID)</button>
+      <button type="button" id="displayExpenseBtn">Display Expenses</button>
+      <button type="button" id="calcMonthlyExpenseBtn">Calculate Monthly Expense</button>
+      <button type="button" id="clearExpenseBtn">Clear</button>
+    </div>
+
+    <div id="expenseOutput" class="output-box"></div>
+  </div>
+
+  <!-- 4. BUDGET MANAGEMENT MODULE -->
+  <div class="container module-card" id="module4">
+    <h2>4. Budget Management Module (Class: Budget)</h2>
+
+    <div class="form-group">
+      <label for="budgetId">Budget ID (budgetId):</label>
+      <input type="number" id="budgetId" placeholder="Example: 301" value="301">
+    </div>
+
+    <div class="form-group">
+      <label for="budgetMonth">Month (month):</label>
+      <select id="budgetMonth">
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November" selected>November</option>
+        <option value="December">December</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="budgetCategory">Expense Category (category):</label>
+      <select id="budgetCategory">
+        <option value="Overall Monthly Budget" selected>Overall Monthly Budget</option>
+        <option value="Education">Education</option>
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Transport">Transport</option>
+        <option value="Travel">Travel</option>
+        <option value="Bills">Bills</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="budgetAmount">Planned Budget (budgetAmount):</label>
+      <input type="number" id="budgetAmount" placeholder="Example: 15000.0" value="15000">
+    </div>
+
+    <div class="form-group">
+      <label for="spentAmount">Amount Spent (spentAmount):</label>
+      <input type="number" id="spentAmount" placeholder="Example: 12000.0" value="12000">
+    </div>
+
+    <div class="form-group">
+      <label for="remainingAmount">Remaining Budget (remainingAmount):</label>
+      <input type="number" id="remainingAmount" placeholder="Auto-calculated" value="3000" readonly>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="createBudgetBtn">Create Budget</button>
+      <button type="button" id="updateBudgetBtn">Update Budget</button>
+      <button type="button" id="calcRemainingBudgetBtn">Calculate Remaining Budget</button>
+      <button type="button" id="checkBudgetStatusBtn">Check Budget Status</button>
+      <button type="button" id="displayBudgetBtn">Display Budget</button>
+      <button type="button" id="clearBudgetBtn">Clear</button>
+    </div>
+
+    <div id="budgetOutput" class="output-box"></div>
+  </div>
+
+  <!-- 5. MONTHLY ANALYSIS MODULE -->
+  <div class="container module-card" id="module5">
+    <h2>5. Monthly Analysis Module (Class: MonthlyAnalysis)</h2>
+
+    <div class="form-group">
+      <label for="analysisId">Analysis ID (analysisId):</label>
+      <input type="number" id="analysisId" placeholder="Example: 501" value="501">
+    </div>
+
+    <div class="form-group">
+      <label for="analysisMonth">Selected Month (month):</label>
+      <select id="analysisMonth">
+        <option value="November" selected>November</option>
+        <option value="October">October</option>
+        <option value="December">December</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="analysisTotalIncome">Monthly Income (totalIncome):</label>
+      <input type="number" id="analysisTotalIncome" value="25000">
+    </div>
+
+    <div class="form-group">
+      <label for="analysisTotalExpense">Monthly Expense (totalExpense):</label>
+      <input type="number" id="analysisTotalExpense" value="12000">
+    </div>
+
+    <div class="form-group">
+      <label for="analysisTotalBudget">Planned Budget (totalBudget):</label>
+      <input type="number" id="analysisTotalBudget" value="15000">
+    </div>
+
+    <div class="form-group">
+      <label for="analysisSavings">Remaining Savings (savings):</label>
+      <input type="number" id="analysisSavings" value="13000" readonly>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="compareBudgetExpenseBtn">Compare Budget &amp; Expense</button>
+      <button type="button" id="calculateSavingsBtn">Calculate Savings</button>
+      <button type="button" id="identifyOverspendingBtn">Identify Overspending</button>
+      <button type="button" id="generateMonthlySummaryBtn">Generate Monthly Summary</button>
+      <button type="button" id="displayAnalysisBtn">Display Analysis</button>
+    </div>
+
+    <div id="monthlyAnalysisOutput" class="output-box"></div>
+  </div>
+
+  <!-- 6. VALIDATESERVICE MODULE -->
+  <div class="container module-card" id="module6">
+    <h2>6. ValidateService Module (Class: ValidateService)</h2>
+
+    <div class="form-group">
+      <label for="valUserId">User ID to Validate (userId):</label>
+      <input type="number" id="valUserId" placeholder="Example: 101" value="101">
+    </div>
+
+    <div class="form-group">
+      <label for="valAmount">Amount to Validate (amount):</label>
+      <input type="number" id="valAmount" placeholder="Example: 2500.0" value="2500">
+    </div>
+
+    <div class="form-group">
+      <label for="valEmail">Email to Validate (email):</label>
+      <input type="email" id="valEmail" placeholder="Example: rahul@moneymate.com" value="rahul@moneymate.com">
+    </div>
+
+    <div class="form-group">
+      <label for="valCategory">Expense Category to Validate (category):</label>
+      <select id="valCategory">
+        <option value="Education">Education</option>
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Transport">Transport</option>
+        <option value="Travel">Travel</option>
+        <option value="Bills">Bills</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="validateAllBtn">Validate All Fields</button>
+      <button type="button" id="clearValidateBtn">Clear</button>
+    </div>
+
+    <div id="validateOutput" class="output-box">Click "Validate All Fields" to verify userId, amount, email, and category.</div>
+  </div>
+
+  <!-- 7. SEARCHSERVICE MODULE -->
+  <div class="container module-card" id="module7">
+    <h2>7. SearchService Module (Class: SearchService)</h2>
+
+    <div class="form-group">
+      <label for="searchCategory">Search by Expense Category:</label>
+      <select id="searchCategory">
+        <option value="ALL">All Categories</option>
+        <option value="Education">Education</option>
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Transport">Transport</option>
+        <option value="Travel">Travel</option>
+        <option value="Bills">Bills</option>
+        <option value="Healthcare">Healthcare</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="searchKeyword">Search by Keyword or Expense ID:</label>
+      <input type="text" id="searchKeyword" placeholder="Example: 201 or Food">
+    </div>
+
+    <div class="btn-group">
+      <button type="button" id="searchExpensesBtn">Search Expenses</button>
+      <button type="button" id="showAllExpensesBtn">Show All Expenses</button>
+      <button type="button" id="clearSearchBtn">Clear Search</button>
+    </div>
+
+    <div id="searchOutput" class="output-box"></div>
+  </div>
+
+  <!-- 8. REPORTGENERATIONSERVICE MODULE -->
+  <div class="container module-card" id="module8">
+    <h2>8. ReportGenerationService Module (Class: ReportGenerationService)</h2>
+    <p>Generates a consolidated table of User Profile, Monthly Income, Category-wise Expenses, and Budget Utilization.</p>
+    <div class="btn-group">
+      <button type="button" id="generateFullReportBtn">Generate Full Financial Report</button>
+    </div>
+    <div id="reportOutput" class="output-box"></div>
+  </div>
+
+  <!-- 9. ANALYSISSERVICE MODULE -->
+  <div class="container module-card" id="module9">
+    <h2>9. AnalysisService Module (Class: AnalysisService / AnalysisServiceTest)</h2>
+    <p>Displays the formatted Money Mate Analysis console report with Budget Analysis, Overspending Analysis, Category-wise Expenses, and Monthly Insights.</p>
+    <div class="btn-group">
+      <button type="button" id="runAnalysisServiceBtn">Run AnalysisServiceTest Output</button>
+    </div>
+    <pre id="consoleReportOutput" class="console-box"></pre>
+  </div>
+
+  <script>
+    // Default Application State matching PDF & Console Screenshot
+    const defaultData = {
+      user: {
+        userId: 101,
+        userName: 'Rahul Sharma',
+        mobileNumber: '9876543210',
+        email: 'rahul@moneymate.com'
+      },
+      incomes: [
+        { incomeId: 1, userId: 101, month: 'November', incomeAmount: 25000.0, incomeSource: 'Salary' }
+      ],
+      expenses: [
+        { expenseId: 201, userId: 101, category: 'Education', expenseDate: '2026-11-01', amount: 4000.0, description: 'Course & Tuition Fee' },
+        { expenseId: 202, userId: 101, category: 'Shopping', expenseDate: '2026-11-02', amount: 2000.0, description: 'Clothes & Accessories' },
+        { expenseId: 203, userId: 101, category: 'Transport', expenseDate: '2026-11-02', amount: 1500.0, description: 'Metro & Fuel' },
+        { expenseId: 204, userId: 101, category: 'Food', expenseDate: '2026-11-02', amount: 3000.0, description: 'Groceries & Dining' },
+        { expenseId: 205, userId: 101, category: 'Bills', expenseDate: '2026-11-02', amount: 1500.0, description: 'Electricity & Internet' }
+      ],
+      budget: {
+        budgetId: 301,
+        month: 'November',
+        category: 'Overall Monthly Budget',
+        budgetAmount: 15000.0,
+        spentAmount: 12000.0,
+        remainingAmount: 3000.0
+      }
+    };
+
+    let appState = JSON.parse(JSON.stringify(defaultData));
+
+    function fmtRs(val) {
+      return 'Rs. ' + Number(val).toFixed(1);
+    }
+
+    function getTotalIncome() {
+      return appState.incomes.reduce(function (sum, item) {
+        return sum + Number(item.incomeAmount);
+      }, 0);
+    }
+
+    function getTotalExpense() {
+      return appState.expenses.reduce(function (sum, item) {
+        return sum + Number(item.amount);
+      }, 0);
+    }
+
+    function getCategoryTotals() {
+      const totals = {};
+      appState.expenses.forEach(function (exp) {
+        if (!totals[exp.category]) {
+          totals[exp.category] = 0;
+        }
+        totals[exp.category] += Number(exp.amount);
+      });
+      return totals;
+    }
+
+    // 1. User Module Functions
+    function renderUserOutput(message) {
+      const u = appState.user;
+      const prefix = message ? '<p class="status-msg">' + message + '</p>' : '';
+      document.getElementById('userOutput').innerHTML =
+        prefix +
+        '<strong>User Profile Details:</strong><br>' +
+        'User ID: ' + u.userId + '<br>' +
+        'User Name: ' + u.userName + '<br>' +
+        'Mobile Number: ' + u.mobileNumber + '<br>' +
+        'Email: ' + u.email;
+    }
+
+    // 2. Monthly Income Module Functions
+    function renderIncomeOutput(message) {
+      const prefix = message ? '<p class="status-msg">' + message + '</p>' : '';
+      let rows = '';
+      appState.incomes.forEach(function (inc) {
+        rows += '<tr>' +
+          '<td>' + inc.incomeId + '</td>' +
+          '<td>' + inc.userId + '</td>' +
+          '<td>' + inc.month + '</td>' +
+          '<td>' + inc.incomeSource + '</td>' +
+          '<td>' + fmtRs(inc.incomeAmount) + '</td>' +
+          '</tr>';
+      });
+      document.getElementById('incomeOutput').innerHTML =
+        prefix +
+        '<strong>Total Monthly Income: ' + fmtRs(getTotalIncome()) + '</strong>' +
+        '<table><thead><tr><th>Income ID</th><th>User ID</th><th>Month</th><th>Source</th><th>Amount</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody></table>';
+    }
+
+    // 3. Expense Module Functions
+    function renderExpenseOutput(message) {
+      const prefix = message ? '<p class="status-msg">' + message + '</p>' : '';
+      let rows = '';
+      appState.expenses.forEach(function (exp) {
+        rows += '<tr>' +
+          '<td>' + exp.expenseId + '</td>' +
+          '<td>' + exp.category + '</td>' +
+          '<td>' + exp.expenseDate + '</td>' +
+          '<td>' + exp.description + '</td>' +
+          '<td>' + fmtRs(exp.amount) + '</td>' +
+          '</tr>';
+      });
+      document.getElementById('expenseOutput').innerHTML =
+        prefix +
+        '<strong>Total Monthly Expense: ' + fmtRs(getTotalExpense()) + '</strong>' +
+        '<table><thead><tr><th>Expense ID</th><th>Category</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody></table>';
+    }
+
+    // 4. Budget Module Functions
+    function renderBudgetOutput(message) {
+      const b = appState.budget;
+      b.remainingAmount = b.budgetAmount - b.spentAmount;
+      document.getElementById('remainingAmount').value = b.remainingAmount;
+      const statusText = b.remainingAmount >= 0
+        ? 'You are within your budget.'
+        : 'Alert: You have exceeded your planned budget!';
+      const prefix = message ? '<p class="status-msg">' + message + '</p>' : '';
+      document.getElementById('budgetOutput').innerHTML =
+        prefix +
+        '<strong>Budget Details (ID: ' + b.budgetId + ' - ' + b.month + '):</strong><br>' +
+        'Category: ' + b.category + '<br>' +
+        'Planned Budget: ' + fmtRs(b.budgetAmount) + '<br>' +
+        'Amount Spent: ' + fmtRs(b.spentAmount) + '<br>' +
+        'Remaining Budget: ' + fmtRs(b.remainingAmount) + '<br>' +
+        'Status: <strong>' + statusText + '</strong>';
+    }
+
+    // 5. Monthly Analysis Module Functions
+    function renderMonthlyAnalysisOutput(message) {
+      const inc = parseFloat(document.getElementById('analysisTotalIncome').value) || 0;
+      const exp = parseFloat(document.getElementById('analysisTotalExpense').value) || 0;
+      const bud = parseFloat(document.getElementById('analysisTotalBudget').value) || 0;
+      const sav = inc - exp;
+      const remBud = bud - exp;
+      const savPct = inc > 0 ? (sav / inc) * 100 : 0;
+      document.getElementById('analysisSavings').value = sav;
+
+      const budgetCompare = remBud >= 0
+        ? 'Within Budget (Remaining Budget: ' + fmtRs(remBud) + ')'
+        : 'Over Budget by ' + fmtRs(Math.abs(remBud));
+      const overspendStatus = exp > bud
+        ? 'Major overspending detected!'
+        : 'No major overspending detected.';
+
+      const prefix = message ? '<p class="status-msg">' + message + '</p>' : '';
+      document.getElementById('monthlyAnalysisOutput').innerHTML =
+        prefix +
+        '<strong>Monthly Analysis Summary (' + document.getElementById('analysisMonth').value + '):</strong><br>' +
+        'Total Income: ' + fmtRs(inc) + ' | Total Expense: ' + fmtRs(exp) + ' | Planned Budget: ' + fmtRs(bud) + '<br>' +
+        'Calculated Savings: <strong>' + fmtRs(sav) + ' (' + savPct.toFixed(2) + '%)</strong><br>' +
+        'Budget Comparison: ' + budgetCompare + '<br>' +
+        'Overspending Check: ' + overspendStatus;
+    }
+
+    // 7. SearchService Module Functions
+    function renderSearchResults(list, note) {
+      let rows = '';
+      list.forEach(function (exp) {
+        rows += '<tr>' +
+          '<td>' + exp.expenseId + '</td>' +
+          '<td>' + exp.category + '</td>' +
+          '<td>' + exp.expenseDate + '</td>' +
+          '<td>' + exp.description + '</td>' +
+          '<td>' + fmtRs(exp.amount) + '</td>' +
+          '</tr>';
+      });
+      if (!rows) {
+        rows = '<tr><td colspan="5">No matching expense records found.</td></tr>';
+      }
+      document.getElementById('searchOutput').innerHTML =
+        '<strong>' + note + ' (' + list.length + ' record(s))</strong>' +
+        '<table><thead><tr><th>Expense ID</th><th>Category</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead>' +
+        '<tbody>' + rows + '</tbody></table>';
+    }
+
+    // 8. ReportGenerationService Module Functions
+    function renderFullReport() {
+      const catTotals = getCategoryTotals();
+      let catHtml = '<ul>';
+      Object.keys(catTotals).forEach(function (cat) {
+        catHtml += '<li><strong>' + cat + '</strong> : ' + fmtRs(catTotals[cat]) + '</li>';
+      });
+      catHtml += '</ul>';
+
+      const totalInc = getTotalIncome();
+      const totalExp = getTotalExpense();
+      const totalBud = appState.budget.budgetAmount;
+      const savings = totalInc - totalExp;
+      const savingsPct = totalInc > 0 ? (savings / totalInc) * 100 : 0;
+
+      document.getElementById('reportOutput').innerHTML =
+        '<h3>Monthly Financial Report — ' + appState.budget.month + '</h3>' +
+        '<p><strong>User:</strong> ' + appState.user.userName + ' (ID: ' + appState.user.userId + ', Email: ' + appState.user.email + ')</p>' +
+        '<p><strong>Total Income:</strong> ' + fmtRs(totalInc) + ' | <strong>Total Expense:</strong> ' + fmtRs(totalExp) + ' | <strong>Total Budget:</strong> ' + fmtRs(totalBud) + ' | <strong>Total Savings:</strong> ' + fmtRs(savings) + ' (' + savingsPct.toFixed(2) + '%)</p>' +
+        '<strong>Category-wise Expenses Breakdown:</strong>' + catHtml;
+    }
+
+    // 9. AnalysisService Console Output
+    function renderConsoleAnalysis() {
+      const inc = parseFloat(document.getElementById('analysisTotalIncome').value) || 0;
+      const exp = parseFloat(document.getElementById('analysisTotalExpense').value) || 0;
+      const bud = parseFloat(document.getElementById('analysisTotalBudget').value) || 0;
+      const sav = inc - exp;
+      const rem = bud - exp;
+      const savPct = inc > 0 ? (sav / inc) * 100 : 0;
+
+      const catTotals = getCategoryTotals();
+      const catLines = Object.keys(catTotals).map(function (c) {
+        return c + ' : ' + fmtRs(catTotals[c]);
+      }).join('\n');
+
+      const lines = [
+        '===================================',
+        '       MONEY MATE ANALYSIS',
+        '===================================',
+        'Total Income   : ' + fmtRs(inc),
+        'Total Expense  : ' + fmtRs(exp),
+        'Total Budget   : ' + fmtRs(bud),
+        'Total Savings  : ' + fmtRs(sav),
+        '',
+        '--- Budget Analysis ---',
+        rem >= 0 ? 'You are within your budget.' : 'You have exceeded your budget.',
+        'Remaining Budget: ' + fmtRs(rem),
+        '',
+        '--- Overspending Analysis ---',
+        exp <= bud ? 'No major overspending detected.' : 'Major overspending detected!',
+        '',
+        '--- Category-wise Expenses ---',
+        catLines,
+        '',
+        '--- Monthly Insights ---',
+        sav >= 0 ? 'Good! You saved ' + fmtRs(sav) : 'Alert! Deficit of ' + fmtRs(Math.abs(sav)),
+        'Savings Percentage: ' + savPct.toFixed(2) + '%',
+        '',
+        '==================================='
+      ];
+      document.getElementById('consoleReportOutput').textContent = lines.join('\n');
+    }
+
+    function syncAnalysisInputsFromRecords() {
+      const totalInc = getTotalIncome();
+      const totalExp = getTotalExpense();
+      appState.budget.spentAmount = totalExp;
+      appState.budget.remainingAmount = appState.budget.budgetAmount - totalExp;
+      document.getElementById('spentAmount').value = totalExp;
+      document.getElementById('remainingAmount').value = appState.budget.remainingAmount;
+      document.getElementById('analysisTotalIncome').value = totalInc;
+      document.getElementById('analysisTotalExpense').value = totalExp;
+      document.getElementById('analysisTotalBudget').value = appState.budget.budgetAmount;
+      document.getElementById('analysisSavings').value = totalInc - totalExp;
+    }
+
+    function refreshAllOutputs() {
+      renderUserOutput();
+      renderIncomeOutput();
+      renderExpenseOutput();
+      renderBudgetOutput();
+      renderMonthlyAnalysisOutput();
+      renderSearchResults(appState.expenses, 'All Recorded Expenses');
+      renderFullReport();
+      renderConsoleAnalysis();
+    }
+
+    // Event Listeners for Module 10 (Main Menu)
+    document.getElementById('mainProcessBtn').addEventListener('click', function () {
+      const choice = document.getElementById('menuSelect').value;
+      const cards = document.querySelectorAll('.module-card');
+      cards.forEach(function (card) {
+        if (choice === 'ALL' || card.id === choice) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('mainStatus').textContent =
+        choice === 'ALL' ? 'Displaying all MoneyMate modules.' : 'Switched view to ' + choice + '.';
+    });
+
+    document.getElementById('mainShowAllBtn').addEventListener('click', function () {
+      document.getElementById('menuSelect').value = 'ALL';
+      document.querySelectorAll('.module-card').forEach(function (card) {
+        card.style.display = 'block';
+      });
+      document.getElementById('mainStatus').textContent = 'Displaying all MoneyMate modules.';
+    });
+
+    document.getElementById('mainResetBtn').addEventListener('click', function () {
+      appState = JSON.parse(JSON.stringify(defaultData));
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      document.getElementById('mainStatus').textContent = 'Sample project data restored.';
+    });
+
+    // Event Listeners for Module 1 (User)
+    document.getElementById('registerUserBtn').addEventListener('click', function () {
+      appState.user = {
+        userId: parseInt(document.getElementById('userId').value, 10) || 101,
+        userName: document.getElementById('userName').value.trim() || 'User',
+        mobileNumber: document.getElementById('mobileNumber').value.trim() || '0000000000',
+        email: document.getElementById('userEmail').value.trim() || 'user@moneymate.com'
+      };
+      renderUserOutput('registerUser(): User registered successfully.');
+      renderFullReport();
+    });
+
+    document.getElementById('updateUserBtn').addEventListener('click', function () {
+      appState.user = {
+        userId: parseInt(document.getElementById('userId').value, 10) || 101,
+        userName: document.getElementById('userName').value.trim() || 'User',
+        mobileNumber: document.getElementById('mobileNumber').value.trim() || '0000000000',
+        email: document.getElementById('userEmail').value.trim() || 'user@moneymate.com'
+      };
+      renderUserOutput('updateUser(): User details updated.');
+      renderFullReport();
+    });
+
+    document.getElementById('displayUserBtn').addEventListener('click', function () {
+      renderUserOutput('displayUser(): Showing current user record.');
+    });
+
+    document.getElementById('clearUserBtn').addEventListener('click', function () {
+      document.getElementById('userId').value = '';
+      document.getElementById('userName').value = '';
+      document.getElementById('mobileNumber').value = '';
+      document.getElementById('userEmail').value = '';
+    });
+
+    // Event Listeners for Module 2 (MonthlyIncome)
+    document.getElementById('addIncomeBtn').addEventListener('click', function () {
+      const newInc = {
+        incomeId: parseInt(document.getElementById('incomeId').value, 10) || (appState.incomes.length + 1),
+        userId: parseInt(document.getElementById('incomeUserId').value, 10) || 101,
+        month: document.getElementById('incomeMonth').value,
+        incomeAmount: parseFloat(document.getElementById('incomeAmount').value) || 0,
+        incomeSource: document.getElementById('incomeSource').value
+      };
+      appState.incomes.push(newInc);
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      renderIncomeOutput('addIncome(): Added income record ID ' + newInc.incomeId + '.');
+    });
+
+    document.getElementById('updateIncomeBtn').addEventListener('click', function () {
+      const id = parseInt(document.getElementById('incomeId').value, 10);
+      const amt = parseFloat(document.getElementById('incomeAmount').value) || 0;
+      const src = document.getElementById('incomeSource').value;
+      const mo = document.getElementById('incomeMonth').value;
+      let found = false;
+      appState.incomes.forEach(function (inc) {
+        if (inc.incomeId === id) {
+          inc.incomeAmount = amt;
+          inc.incomeSource = src;
+          inc.month = mo;
+          found = true;
+        }
+      });
+      if (!found && appState.incomes.length > 0) {
+        appState.incomes[0].incomeAmount = amt;
+        appState.incomes[0].incomeSource = src;
+        appState.incomes[0].month = mo;
+      }
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      renderIncomeOutput('updateIncome(): Updated income record.');
+    });
+
+    document.getElementById('displayIncomeBtn').addEventListener('click', function () {
+      renderIncomeOutput('displayIncome(): Listing all income records.');
+    });
+
+    document.getElementById('calcTotalIncomeBtn').addEventListener('click', function () {
+      renderIncomeOutput('calculateTotalIncome(): Total Income is ' + fmtRs(getTotalIncome()));
+    });
+
+    document.getElementById('clearIncomeBtn').addEventListener('click', function () {
+      document.getElementById('incomeId').value = '';
+      document.getElementById('incomeAmount').value = '';
+    });
+
+    // Event Listeners for Module 3 (Expense)
+    document.getElementById('addExpenseBtn').addEventListener('click', function () {
+      const newExp = {
+        expenseId: parseInt(document.getElementById('expenseId').value, 10) || (200 + appState.expenses.length + 1),
+        userId: parseInt(document.getElementById('expenseUserId').value, 10) || 101,
+        category: document.getElementById('expenseCategory').value,
+        expenseDate: document.getElementById('expenseDate').value || '2026-11-02',
+        amount: parseFloat(document.getElementById('expenseAmount').value) || 0,
+        description: document.getElementById('expenseDescription').value.trim() || 'Expense item'
+      };
+      appState.expenses.push(newExp);
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      renderExpenseOutput('addExpense(): Added ' + newExp.category + ' expense of ' + fmtRs(newExp.amount) + '.');
+    });
+
+    document.getElementById('updateExpenseBtn').addEventListener('click', function () {
+      const id = parseInt(document.getElementById('expenseId').value, 10);
+      const cat = document.getElementById('expenseCategory').value;
+      const amt = parseFloat(document.getElementById('expenseAmount').value) || 0;
+      const desc = document.getElementById('expenseDescription').value.trim();
+      const dt = document.getElementById('expenseDate').value;
+      let updated = false;
+      appState.expenses.forEach(function (exp) {
+        if (exp.expenseId === id) {
+          exp.category = cat;
+          exp.amount = amt;
+          if (desc) exp.description = desc;
+          if (dt) exp.expenseDate = dt;
+          updated = true;
+        }
+      });
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      renderExpenseOutput(updated ? 'updateExpense(): Updated Expense ID ' + id + '.' : 'Expense ID not found; no changes made.');
+    });
+
+    document.getElementById('deleteExpenseBtn').addEventListener('click', function () {
+      const id = parseInt(document.getElementById('expenseId').value, 10);
+      const before = appState.expenses.length;
+      appState.expenses = appState.expenses.filter(function (exp) {
+        return exp.expenseId !== id;
+      });
+      syncAnalysisInputsFromRecords();
+      refreshAllOutputs();
+      renderExpenseOutput(appState.expenses.length < before ? 'deleteExpense(): Deleted Expense ID ' + id + '.' : 'Expense ID ' + id + ' not found.');
+    });
+
+    document.getElementById('displayExpenseBtn').addEventListener('click', function () {
+      renderExpenseOutput('displayExpense(): Showing all categorized expenses.');
+    });
+
+    document.getElementById('calcMonthlyExpenseBtn').addEventListener('click', function () {
+      renderExpenseOutput('calculateMonthlyExpense(): Total Monthly Expense = ' + fmtRs(getTotalExpense()));
+    });
+
+    document.getElementById('clearExpenseBtn').addEventListener('click', function () {
+      document.getElementById('expenseId').value = '';
+      document.getElementById('expenseAmount').value = '';
+      document.getElementById('expenseDescription').value = '';
+    });
+
+    // Event Listeners for Module 4 (Budget)
+    function updateBudgetFromInputs(msg) {
+      appState.budget.budgetId = parseInt(document.getElementById('budgetId').value, 10) || 301;
+      appState.budget.month = document.getElementById('budgetMonth').value;
+      appState.budget.category = document.getElementById('budgetCategory').value;
+      appState.budget.budgetAmount = parseFloat(document.getElementById('budgetAmount').value) || 0;
+      appState.budget.spentAmount = parseFloat(document.getElementById('spentAmount').value) || 0;
+      appState.budget.remainingAmount = appState.budget.budgetAmount - appState.budget.spentAmount;
+      document.getElementById('analysisTotalBudget').value = appState.budget.budgetAmount;
+      renderBudgetOutput(msg);
+      renderMonthlyAnalysisOutput();
+      renderFullReport();
+      renderConsoleAnalysis();
+    }
+
+    document.getElementById('createBudgetBtn').addEventListener('click', function () {
+      updateBudgetFromInputs('createBudget(): Budget created successfully.');
+    });
+
+    document.getElementById('updateBudgetBtn').addEventListener('click', function () {
+      updateBudgetFromInputs('updateBudget(): Budget updated successfully.');
+    });
+
+    document.getElementById('calcRemainingBudgetBtn').addEventListener('click', function () {
+      updateBudgetFromInputs('calculateRemainingBudget(): Remaining Budget calculated.');
+    });
+
+    document.getElementById('checkBudgetStatusBtn').addEventListener('click', function () {
+      updateBudgetFromInputs('checkBudgetStatus(): Checked budget threshold status.');
+    });
+
+    document.getElementById('displayBudgetBtn').addEventListener('click', function () {
+      renderBudgetOutput('displayBudget(): Displaying current budget configuration.');
+    });
+
+    document.getElementById('clearBudgetBtn').addEventListener('click', function () {
+      document.getElementById('budgetAmount').value = '';
+      document.getElementById('spentAmount').value = '';
+      document.getElementById('remainingAmount').value = '';
+    });
+
+    // Event Listeners for Module 5 (MonthlyAnalysis)
+    document.getElementById('compareBudgetExpenseBtn').addEventListener('click', function () {
+      renderMonthlyAnalysisOutput('compareBudgetAndExpense(): Compared planned budget with actual expenses.');
+      renderConsoleAnalysis();
+    });
+
+    document.getElementById('calculateSavingsBtn').addEventListener('click', function () {
+      renderMonthlyAnalysisOutput('calculateSavings(): Updated monthly savings and savings rate.');
+      renderConsoleAnalysis();
+    });
+
+    document.getElementById('identifyOverspendingBtn').addEventListener('click', function () {
+      renderMonthlyAnalysisOutput('identifyOverspending(): Checked for budget overspending.');
+      renderConsoleAnalysis();
+    });
+
+    document.getElementById('generateMonthlySummaryBtn').addEventListener('click', function () {
+      renderMonthlyAnalysisOutput('generateMonthlySummary(): Monthly summary generated.');
+      renderConsoleAnalysis();
+    });
+
+    document.getElementById('displayAnalysisBtn').addEventListener('click', function () {
+      renderMonthlyAnalysisOutput('displayAnalysis(): Showing full monthly analysis.');
+      renderConsoleAnalysis();
+    });
+
+    // Event Listeners for Module 6 (ValidateService)
+    document.getElementById('validateAllBtn').addEventListener('click', function () {
+      const uId = parseInt(document.getElementById('valUserId').value, 10);
+      const amt = parseFloat(document.getElementById('valAmount').value);
+      const email = document.getElementById('valEmail').value.trim();
+      const cat = document.getElementById('valCategory').value;
+
+      const errors = [];
+      if (isNaN(uId) || uId <= 0) errors.push('Invalid User ID (must be a positive integer).');
+      if (isNaN(amt) || amt <= 0) errors.push('Invalid Amount (must be greater than 0).');
+      if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) errors.push('Invalid Email format.');
+      if (!cat) errors.push('Category cannot be empty.');
+
+      const out = document.getElementById('validateOutput');
+      if (errors.length === 0) {
+        out.innerHTML = '<span class="status-msg">Validation Passed:</span> All fields (userId=' + uId + ', amount=' + fmtRs(amt) + ', email=' + email + ', category=' + cat + ') are valid.';
+      } else {
+        out.innerHTML = '<span class="error-msg">Validation Failed:</span><br>' + errors.join('<br>');
+      }
+    });
+
+    document.getElementById('clearValidateBtn').addEventListener('click', function () {
+      document.getElementById('valUserId').value = '';
+      document.getElementById('valAmount').value = '';
+      document.getElementById('valEmail').value = '';
+      document.getElementById('validateOutput').textContent = 'Cleared validation inputs.';
+    });
+
+    // Event Listeners for Module 7 (SearchService)
+    document.getElementById('searchExpensesBtn').addEventListener('click', function () {
+      const cat = document.getElementById('searchCategory').value;
+      const kw = document.getElementById('searchKeyword').value.trim().toLowerCase();
+      const filtered = appState.expenses.filter(function (exp) {
+        const matchCat = cat === 'ALL' || exp.category === cat;
+        const matchKw = !kw ||
+          String(exp.expenseId).toLowerCase().indexOf(kw) !== -1 ||
+          exp.category.toLowerCase().indexOf(kw) !== -1 ||
+          exp.description.toLowerCase().indexOf(kw) !== -1;
+        return matchCat && matchKw;
+      });
+      renderSearchResults(filtered, 'Filtered Search Results');
+    });
+
+    document.getElementById('showAllExpensesBtn').addEventListener('click', function () {
+      document.getElementById('searchCategory').value = 'ALL';
+      document.getElementById('searchKeyword').value = '';
+      renderSearchResults(appState.expenses, 'All Recorded Expenses');
+    });
+
+    document.getElementById('clearSearchBtn').addEventListener('click', function () {
+      document.getElementById('searchCategory').value = 'ALL';
+      document.getElementById('searchKeyword').value = '';
+      document.getElementById('searchOutput').innerHTML = 'Search cleared.';
+    });
+
+    // Event Listeners for Module 8 & 9
+    document.getElementById('generateFullReportBtn').addEventListener('click', function () {
+      renderFullReport();
+    });
+
+    document.getElementById('runAnalysisServiceBtn').addEventListener('click', function () {
+      renderConsoleAnalysis();
+    });
+
+    // Initial render
+    refreshAllOutputs();
+  </script>
+</body>
+</html>
